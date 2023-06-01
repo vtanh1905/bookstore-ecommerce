@@ -12,7 +12,7 @@ export class Account extends BaseEntity {
   password: string
 
   @Column()
-  fullname: string
+  fullName: string
 
   @Column()
   phone: string
