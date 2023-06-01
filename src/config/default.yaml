@@ -11,3 +11,4 @@ DATABASE:
     SCHEMA: 'bookstore'
     USERNAME: 'postgres'
     PASSWORD: '123456'
+    SYNCHRONIZE: true

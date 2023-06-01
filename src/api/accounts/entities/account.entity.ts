@@ -1,8 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
 
-@Entity({ name: 'accounts'})
+@Entity({ name: 'accounts' })
 export class Account extends BaseEntity {
   @PrimaryGeneratedColumn()
+  id: string
+
+  @Column({ unique: true })
   username: string
 
   @Column()
