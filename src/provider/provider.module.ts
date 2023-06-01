@@ -5,4 +5,4 @@ import { DatabaseModule } from './database/database.module'
 @Module({
   imports: [DatabaseModule],
 })
-export class ProvidersModule {}
+export class ProviderModule {}
