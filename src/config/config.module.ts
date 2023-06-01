@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule as NestConfigModule, ConfigService } from '@nestjs/config'
+import { ConfigModule as NestConfigModule } from '@nestjs/config'
 import { readFileSync } from 'fs'
 import * as yaml from 'js-yaml'
 import { join } from 'path'
