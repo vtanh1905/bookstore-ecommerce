@@ -7,5 +7,7 @@ DATABASE:
   POSTGRES:
     HOST: 'localhost'
     PORT: 5432
+    DATABASE: 'postgres'
+    SCHEMA: 'bookstore'
     USERNAME: 'postgres'
     PASSWORD: '123456'

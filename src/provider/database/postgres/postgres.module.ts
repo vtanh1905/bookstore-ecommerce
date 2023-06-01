@@ -13,6 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
         port: configService.get('DATABASE.POSTGRES.POST'),
         username: configService.get('DATABASE.POSTGRES.USERNAME'),
         password: configService.get('DATABASE.POSTGRES.PASSWORD'),
+        database: configService.get('DATABASE.POSTGRES.DATABASE'),
+        schema: configService.get('DATABASE.POSTGRES.SCHEMA'),
       }),
     }),
   ],
