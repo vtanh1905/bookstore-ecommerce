@@ -15,6 +15,7 @@ import { join } from 'path'
         username: configService.get('DATABASE.POSTGRES.USERNAME'),
         password: configService.get('DATABASE.POSTGRES.PASSWORD'),
         database: configService.get('DATABASE.POSTGRES.DATABASE'),
+        ssl: configService.get('DATABASE.POSTGRES.SSL'),
         schema: configService.get('DATABASE.POSTGRES.SCHEMA'),
         synchronize: configService.get('DATABASE.POSTGRES.SYNCHRONIZE'),
         autoLoadEntities: true,
