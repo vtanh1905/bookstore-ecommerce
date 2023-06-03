@@ -1,16 +1,16 @@
 import { Controller, Get } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 
-@ApiTags('health')
-@Controller('/api/health')
-export class HealthController {
-  @Get('ready')
+@ApiTags('meta')
+@Controller('meta')
+export class MetaController {
+  @Get('readiness')
   getReady(): string {
-    return ''
+    return 'READY'
   }
 
-  @Get('live')
+  @Get('liveness')
   getLive(): string {
-    return ''
+    return 'LIVE'
   }
 }

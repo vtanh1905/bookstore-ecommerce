@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common'
 
-import { HealthModule } from './health/health.module'
 import { AccountsModule } from './accounts/accounts.module'
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module'
+import { MetaModule } from './meta/meta.module'
 
 @Module({
-  imports: [HealthModule, AccountsModule, AuthModule],
+  imports: [MetaModule, AccountsModule, AuthModule],
 })
 export class ApiModule {}
