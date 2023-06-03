@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common'
 import { AccountsModule } from './accounts/accounts.module'
 import { AuthModule } from './auth/auth.module'
 import { MetaModule } from './meta/meta.module'
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
-  imports: [MetaModule, AccountsModule, AuthModule],
+  imports: [MetaModule, AccountsModule, AuthModule, CategoriesModule],
 })
 export class ApiModule {}
