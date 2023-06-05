@@ -9,6 +9,20 @@ import { BooksService } from './books.service'
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
+  @Get('/')
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  async get(@Query('limit') limit: number = 6, @Query('page') page: number = 1): Promise<any> {
+    try {
+      return {
+        message: 'Get New Books Successfully',
+        data: await this.booksService.find(limit, page),
+      }
+    } catch (error) {
+      throw new BadRequestException(error.message)
+    }
+  }
+
   @Post()
   async create(@Body() createBookDto: CreateBookDto): Promise<any> {
     try {

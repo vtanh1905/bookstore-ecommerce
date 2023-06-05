@@ -11,17 +11,22 @@ export class BooksService {
     private bookRepository: Repository<Book>,
   ) {}
 
+  find(limit?: number, page?: number) {
+    const offset = limit * page - limit || 0
+    return this.bookRepository.find({ take: limit, skip: offset })
+  }
+
   save(name: string, image: string, author: string, description: string, category: number) {
     return this.bookRepository.save({ name, image, author, description, category: { id: category } })
   }
 
   findByCategoryId(id: number, limit?: number, page?: number) {
-    const offset = limit * page - limit
+    const offset = limit * page - limit || 0
     return this.bookRepository.find({ where: { categoryId: id }, take: limit, skip: offset })
   }
 
   findNewBooks(limit?: number, page?: number) {
-    const offset = limit * page - limit
+    const offset = limit * page - limit || 0
     return this.bookRepository.find({ order: { createdAt: 'DESC' }, take: limit, skip: offset })
   }
 }
