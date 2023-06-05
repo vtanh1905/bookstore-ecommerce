@@ -8,7 +8,7 @@ import { Category } from './entities/category.entity'
 export class CategoriesService {
   constructor(@InjectRepository(Category) private categoryRepository: Repository<Category>) {}
 
-  findAll() {
+  find() {
     return this.categoryRepository.find()
   }
 
