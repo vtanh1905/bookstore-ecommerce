@@ -19,4 +19,9 @@ export class BooksService {
     const offset = limit * page - limit
     return this.bookRepository.find({ where: { categoryId: id }, take: limit, skip: offset })
   }
+
+  findNewBooks(limit?: number, page?: number) {
+    const offset = limit * page - limit
+    return this.bookRepository.find({ order: { createdAt: 'DESC' }, take: limit, skip: offset })
+  }
 }

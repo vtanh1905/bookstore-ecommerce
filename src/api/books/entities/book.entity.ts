@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, RelationId } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, RelationId, CreateDateColumn } from 'typeorm'
 
 import { Category } from 'src/api/categories/entities/category.entity'
 
@@ -25,6 +25,9 @@ export class Book extends BaseEntity {
 
   @Column()
   categoryId: number
+
+  @CreateDateColumn()
+  createdAt: Date
 
   constructor(partial: Partial<Book>) {
     super()

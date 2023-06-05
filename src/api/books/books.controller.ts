@@ -1,5 +1,5 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import { BadRequestException, Body, Controller, Get, Post, Query } from '@nestjs/common'
+import { ApiTags, ApiQuery } from '@nestjs/swagger'
 
 import { CreateBookDto } from './dto/createBook.dto'
 import { BooksService } from './books.service'
@@ -8,7 +8,7 @@ import { BooksService } from './books.service'
 @Controller('/api/books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
-  
+
   @Post()
   async create(@Body() createBookDto: CreateBookDto): Promise<any> {
     try {
@@ -18,6 +18,20 @@ export class BooksController {
 
       return {
         message: 'Create Book Successfully',
+      }
+    } catch (error) {
+      throw new BadRequestException(error.message)
+    }
+  }
+
+  @Get('/new')
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  async getNewBooks(@Query('limit') limit: number = 6, @Query('page') page: number = 1): Promise<any> {
+    try {
+      return {
+        message: 'Get New Books Successfully',
+        data: await this.booksService.findNewBooks(limit, page),
       }
     } catch (error) {
       throw new BadRequestException(error.message)
