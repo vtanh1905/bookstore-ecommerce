@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer'
+import { Role } from 'src/common/constants'
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
 
 @Entity({ name: 'accounts' })
@@ -21,6 +22,9 @@ export class Account extends BaseEntity {
 
   @Column()
   address: string
+
+  @Column({ type: 'enum', enum: Role, default: Role.Customer })
+  role: Role
 
   constructor(partial: Partial<Account>) {
     super()

@@ -1,5 +1,5 @@
-import { Body, Controller, Post, UseGuards, Request, SerializeOptions } from '@nestjs/common'
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
+import { Body, Controller, Post, Request } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from './auth.service'
 import { LoginDto } from './dto/logn.dto'
@@ -49,7 +49,7 @@ export class AuthController {
 
       return {
         message: 'Get Info Successfully',
-        data: await this.accountsService.findByUsername(username)
+        data: await this.accountsService.findByUsername(username),
       }
     } catch (error) {
       throw error
