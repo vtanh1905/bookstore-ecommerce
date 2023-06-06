@@ -8,7 +8,7 @@ export class Account extends BaseEntity {
   id: string
 
   @Column({ unique: true })
-  username: string
+  email: string
 
   @Column()
   @Exclude()

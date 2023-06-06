@@ -1,11 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, Length, IsMobilePhone } from 'class-validator'
+import { IsNotEmpty, Length, IsMobilePhone, IsEmail } from 'class-validator'
 
 export class RegisterDto {
-  @ApiProperty()
+  @ApiProperty({ default: 'string@gmail.com' })
+  @IsEmail()
   @IsNotEmpty()
-  @Length(6, 15)
-  username: string
+  @Length(6, 30)
+  email: string
 
   @ApiProperty()
   @IsNotEmpty()
@@ -22,7 +23,7 @@ export class RegisterDto {
   @IsMobilePhone('vi-VN')
   phone: string
 
-  @ApiProperty({default: '123 A Street, 1 Ward, 1 District, A City'})
+  @ApiProperty({ default: '123 A Street, 1 Ward, 1 District, A City' })
   @IsNotEmpty()
   @Length(12, 100)
   address: string

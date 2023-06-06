@@ -13,14 +13,14 @@ export class AccountsService {
     private accountRepository: Repository<Account>,
   ) {}
 
-  findByUsername(username: string): Promise<Account> {
-    return this.accountRepository.findOne({ where: { username } })
+  findByEmail(email: string): Promise<Account> {
+    return this.accountRepository.findOne({ where: { email } })
   }
 
-  async save(username: string, password: string, fullName: string, phone: string, address: string, role?: Role): Promise<Account> {
+  async save(email: string, password: string, fullName: string, phone: string, address: string, role?: Role): Promise<Account> {
     return this.accountRepository.save(
       new Account({
-        username,
+        email,
         password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
         fullName,
         phone,
