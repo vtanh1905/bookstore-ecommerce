@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { Like, Repository } from 'typeorm'
 
 import { Book } from './entities/book.entity'
 
@@ -11,9 +11,13 @@ export class BooksService {
     private bookRepository: Repository<Book>,
   ) {}
 
-  find(limit?: number, page?: number) {
+  find(search?: string, limit?: number, page?: number) {
     const offset = limit * page - limit || 0
-    return this.bookRepository.find({ take: limit, skip: offset })
+    return this.bookRepository.find({ take: limit, skip: offset, where: { name: Like(`%${search}%`) } })
+  }
+
+  findOne(id: number) {
+    return this.bookRepository.findOne({ where: { id } })
   }
 
   save(name: string, image: string, author: string, description: string, categoryId: number, createdBy: string) {

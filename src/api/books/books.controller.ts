@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post, Query, Request } from '@nestjs/common'
+import { BadRequestException, Body, Controller, Get, Param, Post, Query, Request } from '@nestjs/common'
 import { ApiTags, ApiQuery } from '@nestjs/swagger'
 
 import { CreateBookDto } from './dto/createBook.dto'
@@ -11,13 +11,18 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Get('/')
+  @ApiQuery({ name: 'search', required: false, type: String })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'page', required: false, type: Number })
-  async get(@Query('limit') limit: number = 6, @Query('page') page: number = 1): Promise<any> {
+  async get(
+    @Query('search') search: string = '',
+    @Query('limit') limit: number = 6,
+    @Query('page') page: number = 1,
+  ): Promise<any> {
     try {
       return {
         message: 'Get New Books Successfully',
-        data: await this.booksService.find(limit, page),
+        data: await this.booksService.find(search, limit, page),
       }
     } catch (error) {
       throw new BadRequestException(error.message)
@@ -35,6 +40,18 @@ export class BooksController {
 
       return {
         message: 'Create Book Successfully',
+      }
+    } catch (error) {
+      throw new BadRequestException(error.message)
+    }
+  }
+
+  @Get('/:id')
+  async getDetail(@Param('id') id: number): Promise<any> {
+    try {
+      return {
+        message: 'Get Book Detail Successfully',
+        data: await this.booksService.findOne(id),
       }
     } catch (error) {
       throw new BadRequestException(error.message)
