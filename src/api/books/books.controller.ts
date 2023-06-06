@@ -3,6 +3,7 @@ import { ApiTags, ApiQuery } from '@nestjs/swagger'
 
 import { CreateBookDto } from './dto/createBook.dto'
 import { BooksService } from './books.service'
+import { Role, Auth } from 'src/common'
 
 @ApiTags('books')
 @Controller('/api/books')
@@ -23,6 +24,7 @@ export class BooksController {
     }
   }
 
+  @Auth([Role.Admin, Role.Employer])
   @Post()
   async create(@Body() createBookDto: CreateBookDto): Promise<any> {
     try {
