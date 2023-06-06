@@ -44,7 +44,7 @@ export class CategoriesController {
   @ApiQuery({ name: 'page', required: false, type: Number })
   async getBooksByCategoryId(
     @Param('id') id: number,
-    @Query('limit') limit: number = 6,
+    @Query('limit') limit: number = 8,
     @Query('page') page: number = 1,
   ): Promise<any> {
     try {

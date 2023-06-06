@@ -28,6 +28,9 @@ export class Account extends BaseEntity {
   @Column({ type: 'enum', enum: Role, default: Role.Customer })
   role: Role
 
+  @Column({ default: true })
+  active: boolean
+
   @OneToMany(() => Book, (book) => book.createdBy)
   books: Book[]
 

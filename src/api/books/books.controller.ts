@@ -16,12 +16,12 @@ export class BooksController {
   @ApiQuery({ name: 'page', required: false, type: Number })
   async get(
     @Query('search') search: string = '',
-    @Query('limit') limit: number = 6,
+    @Query('limit') limit: number = 8,
     @Query('page') page: number = 1,
   ): Promise<any> {
     try {
       return {
-        message: 'Get New Books Successfully',
+        message: 'Get Books Successfully',
         data: await this.booksService.find(search, limit, page),
       }
     } catch (error) {
@@ -61,7 +61,7 @@ export class BooksController {
   @Get('/new')
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'page', required: false, type: Number })
-  async getNewBooks(@Query('limit') limit: number = 6, @Query('page') page: number = 1): Promise<any> {
+  async getNewBooks(@Query('limit') limit: number = 8, @Query('page') page: number = 1): Promise<any> {
     try {
       return {
         message: 'Get New Books Successfully',
