@@ -16,8 +16,8 @@ export class BooksService {
     return this.bookRepository.find({ take: limit, skip: offset })
   }
 
-  save(name: string, image: string, author: string, description: string, category: number) {
-    return this.bookRepository.save({ name, image, author, description, category: { id: category } })
+  save(name: string, image: string, author: string, description: string, categoryId: number, createdBy: string) {
+    return this.bookRepository.save({ name, image, author, description, categoryId, createdBy })
   }
 
   findByCategoryId(id: number, limit?: number, page?: number) {

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post, Query } from '@nestjs/common'
+import { BadRequestException, Body, Controller, Get, Post, Query, Request } from '@nestjs/common'
 import { ApiTags, ApiQuery } from '@nestjs/swagger'
 
 import { CreateBookDto } from './dto/createBook.dto'
@@ -26,11 +26,12 @@ export class BooksController {
 
   @Auth([Role.Admin, Role.Employer])
   @Post()
-  async create(@Body() createBookDto: CreateBookDto): Promise<any> {
+  async create(@Request() req, @Body() createBookDto: CreateBookDto): Promise<any> {
     try {
       const { name, image, author, description, categoryId } = createBookDto
+      const { email } = req.user
 
-      await this.booksService.save(name, image, author, description, categoryId)
+      await this.booksService.save(name, image, author, description, categoryId, email)
 
       return {
         message: 'Create Book Successfully',
