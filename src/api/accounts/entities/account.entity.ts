@@ -1,5 +1,8 @@
 import { Exclude } from 'class-transformer'
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm'
+
+import { Book } from 'src/api/books/entities/book.entity'
+import { Role } from 'src/common/constants'
 
 @Entity({ name: 'accounts' })
 export class Account extends BaseEntity {
@@ -7,7 +10,7 @@ export class Account extends BaseEntity {
   id: string
 
   @Column({ unique: true })
-  username: string
+  email: string
 
   @Column()
   @Exclude()
@@ -21,6 +24,15 @@ export class Account extends BaseEntity {
 
   @Column()
   address: string
+
+  @Column({ type: 'enum', enum: Role, default: Role.Customer })
+  role: Role
+
+  @Column({ default: true })
+  active: boolean
+
+  @OneToMany(() => Book, (book) => book.createdBy)
+  books: Book[]
 
   constructor(partial: Partial<Account>) {
     super()
