@@ -1,26 +1,16 @@
 import '@/styles/global.scss'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { NextComponentType, NextPageContext } from 'next/types'
 
-import { LayoutDefault } from '@/components'
-import { useAuth } from '@/hooks'
+import { useAuth, ComponentMetaData, useMetadata } from '@/hooks'
 
 type CustomAppProps = AppProps & {
-  Component: NextComponentType<NextPageContext, any, any> & {
-    title?: string
-    layout?: ({ children }: { children: React.ReactNode }) => JSX.Element
-  }
+  Component: ComponentMetaData
 }
 
 export default function MyApp({ Component, pageProps }: CustomAppProps) {
   const { user, onLogout } = useAuth()
-
-  const title = Component.title
-    ? `Book Store | ${Component.title}`
-    : 'Book Store'
-
-  const Layout = Component.layout ? Component.layout : LayoutDefault
+  const { title, Layout } = useMetadata(Component)
 
   return (
     <>
