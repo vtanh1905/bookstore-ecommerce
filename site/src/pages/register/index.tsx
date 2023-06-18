@@ -1,4 +1,4 @@
-import { Button, Form, Input, Card } from 'antd'
+import { Button, Form, Input, Card, notification } from 'antd'
 import { useRouter } from 'next/router'
 
 import styles from './index.module.scss'
@@ -9,7 +9,7 @@ Registry.title = 'Registry'
 
 export default function Registry() {
   const router = useRouter()
-  const { user } = useAuth()
+  const { user, onRegister } = useAuth()
 
   useEffect(() => {
     if (user) {
@@ -18,15 +18,36 @@ export default function Registry() {
   }, [user])
   if (user) return null
 
-  const onFinish = () => {}
+  const onFinish = async (values: any) => {
+    const { email, password, fullName, phone, address } = values
+    try {
+      const response = await onRegister(
+        email,
+        password,
+        fullName,
+        phone,
+        address
+      )
+      notification.success({
+        message: response.message,
+      })
+      router.push('/login', undefined, { scroll: false })
+    } catch (error: any) {
+      notification.error({
+        message: error.message,
+      })
+    }
+  }
 
   return (
     <Card className={styles.register}>
       <Form onFinish={onFinish} autoComplete='off' layout='vertical'>
         <Form.Item
-          label='Tài Khoản'
-          name='username'
-          rules={[{ required: true, message: 'Vui lòng nhập tài khoản!' }]}
+          label='Email'
+          name='email'
+          rules={[
+            { required: true, type: 'email', message: 'Vui lòng nhập email!' },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -64,7 +85,7 @@ export default function Registry() {
 
         <Form.Item
           label='Họ Tên'
-          name='fullname'
+          name='fullName'
           rules={[{ required: true, message: 'Vui lòng nhập họ tên!' }]}
         >
           <Input />
