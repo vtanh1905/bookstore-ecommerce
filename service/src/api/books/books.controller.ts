@@ -46,18 +46,6 @@ export class BooksController {
     }
   }
 
-  @Get('/:id')
-  async getDetail(@Param('id') id: number): Promise<any> {
-    try {
-      return {
-        message: 'Get Book Detail Successfully',
-        data: await this.booksService.findOne(id),
-      }
-    } catch (error) {
-      throw new BadRequestException(error.message)
-    }
-  }
-
   @Get('/new')
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'page', required: false, type: Number })
@@ -66,6 +54,18 @@ export class BooksController {
       return {
         message: 'Get New Books Successfully',
         data: await this.booksService.findNewBooks(limit, page),
+      }
+    } catch (error) {
+      throw new BadRequestException(error.message)
+    }
+  }
+
+  @Get('/:id')
+  async getDetail(@Param('id') id: number): Promise<any> {
+    try {
+      return {
+        message: 'Get Book Detail Successfully',
+        data: await this.booksService.findOne(id),
       }
     } catch (error) {
       throw new BadRequestException(error.message)
