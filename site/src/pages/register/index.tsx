@@ -2,11 +2,21 @@ import { Button, Form, Input, Card } from 'antd'
 import { useRouter } from 'next/router'
 
 import styles from './index.module.scss'
+import { useAuth } from '@/hooks'
+import { useEffect } from 'react'
 
 Registry.title = 'Registry'
 
 export default function Registry() {
   const router = useRouter()
+  const { user } = useAuth()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user])
+  if (user) return null
 
   const onFinish = () => {}
 
