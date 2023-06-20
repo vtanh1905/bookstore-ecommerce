@@ -33,10 +33,10 @@ export class BooksController {
   @Post()
   async create(@Request() req, @Body() createBookDto: CreateBookDto): Promise<any> {
     try {
-      const { name, image, author, description, categoryId } = createBookDto
+      const { name, image, author, description, price, salePrice, categoryId } = createBookDto
       const { email } = req.user
 
-      await this.booksService.save(name, image, author, description, categoryId, email)
+      await this.booksService.save(name, image, author, description, price, salePrice, categoryId, email)
 
       return {
         message: 'Create Book Successfully',
