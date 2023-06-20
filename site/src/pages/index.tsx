@@ -4,7 +4,6 @@ import { Module, Book } from '@/components'
 import { BookModel } from '@/models'
 import { axios, AxiosResponse } from '@/utils'
 
-
 Home.title = 'Home'
 
 type HomeProps = {
@@ -22,8 +21,8 @@ export default function Home({ books }: HomeProps) {
               imageURL='/images/sach/11_6_2.jpg'
               name={book.name}
               author={book.author}
-              price={159000}
-              salePrice={139000}
+              price={book.price}
+              salePrice={book.salePrice}
             />
           ))}
       </Module>

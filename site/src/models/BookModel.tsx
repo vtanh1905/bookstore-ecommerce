@@ -4,5 +4,7 @@ export type BookModel = {
   author: string
   image: string
   description: string
+  price: number
+  salePrice: number
   categoryId: number
 }
